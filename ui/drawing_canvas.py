@@ -1,17 +1,14 @@
-from PyQt5.QtWidgets import QGraphicsView, QGraphicsScene
-from PyQt5.QtCore import Qt, QPointF
-from PyQt5.QtGui import QPainter, QPen, QColor  # QPainter hozzáadva
+from PyQt5.QtWidgets import QGraphicsView
 
 class DrawingCanvas(QGraphicsView):
-    def __init__(self, machine, serial_connection, parent=None):
-        super().__init__(parent)
+    def __init__(self, machine, serial_connection):  # Frissített konstruktor
+        super().__init__()
         self.machine = machine
         self.serial = serial_connection
         self.init_ui()
-        
+
     def init_ui(self):
-        self.scene = QGraphicsScene()
-        self.setScene(self.scene)
+        self.setSceneRect(0, 0, self.machine.max_x, self.machine.max_y)
         
         # Alap beállítások
         self.setRenderHint(QPainter.Antialiasing)  # Most már működik
